@@ -1,0 +1,90 @@
+datasource db {
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Site settings for editing all textual content on the website dynamically
+model SiteSettings {
+  id             Int      @id @default(1)
+  siteName       String   @default("Studio Eliza Vance")
+  heroTitle      String   @default("Curating Luxury Spaces")
+  heroSubtitle   String   @default("Bespoke interior architecture and design for sophisticated homes.")
+  aboutTitle     String   @default("Our Philosophy")
+  aboutText      String   @db.Text
+  contactEmail   String   @default("studio@elizavance.com")
+  contactPhone   String?
+  contactAddress String?
+  primaryBeige   String   @default("#F4EFEA")
+  primaryWhite   String   @default("#FAFAF9")
+  primaryCharcoal String   @default("#1C1B1A")
+  primaryAccent  String   @default("#8B7E74")
+  copyrightText  String   @default("© 2026 Studio Eliza Vance. All Rights Reserved.")
+  heroTag        String   @default("Interior Architecture & Design")
+  footerManifesto String   @default("Curating architectural balance, rich natural textures, and bespoke modern environments.")
+  portfolioDesc  String   @default("A gallery of luxury residential and commercial environments curated with spatial elegance.")
+  servicesDesc   String   @default("From luxury residential designs to curated art programs, we guide you through space planning, selection, and placement.")
+  contactDesc    String   @default("We design residential and commercial environments worldwide. Fill out our project form to tell us about your layout goals.")
+  instagramUrl   String   @default("#")
+  pinterestUrl   String   @default("#")
+  linkedinUrl    String   @default("#")
+  updatedAt      DateTime @updatedAt
+}
+
+model Project {
+  id          Int            @id @default(autoincrement())
+  title       String
+  slug        String         @unique
+  description String         @db.Text
+  location    String?
+  year        String?
+  isFeatured  Boolean        @default(false)
+  category    String         // e.g., "Residential", "Commercial", "Styling"
+  coverImage  String         // Relative URL /uploads/filename
+  images      ProjectImage[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model ProjectImage {
+  id        Int     @id @default(autoincrement())
+  url       String  // Relative URL /uploads/filename
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Service {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String  @db.Text
+  icon        String  @default("Layout") // Lucide icon identifier
+  priceRange  String?
+}
+
+model Testimonial {
+  id         Int      @id @default(autoincrement())
+  clientName String
+  company    String?
+  quote      String   @db.Text
+  avatarUrl  String?
+  isFeatured Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model Inquiry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  message   String   @db.Text
+  status    String   @default("UNREAD") // UNREAD, READ, ARCHIVED
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String // Hashed password
+}
