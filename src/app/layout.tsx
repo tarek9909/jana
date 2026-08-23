@@ -18,7 +18,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 import prisma from "@/backend/db";
 
 export const metadata: Metadata = {
-  title: "Studio Eliza Vance | Luxury Interior Design",
+  title: "Jana Al Aswad Portfolio",
   description: "Bespoke interior architecture and design for sophisticated homes.",
 };
 
