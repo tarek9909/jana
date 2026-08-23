@@ -2,6 +2,7 @@ import prisma from '@/backend/db';
 import Navbar from '@/frontend/components/Navbar';
 import Footer from '@/frontend/components/Footer';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, Home, Briefcase, Sparkles, Mail, Phone, MapPin } from 'lucide-react';
 import ContactForm from '@/frontend/components/ContactForm';
 import GSAPWrapper from '@/frontend/components/GSAPWrapper';
@@ -99,10 +100,13 @@ export default async function HomePage() {
             <div className="lg:col-span-6">
               <div className="relative aspect-[4/3] w-full bg-primary-beige overflow-hidden rounded-3xl shadow-lg border border-primary-beige gsap-reveal-image gsap-parallax">
                 {projects.length > 0 ? (
-                  <img
+                  <Image
                     src={projects[0].coverImage}
                     alt={projects[0].title}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                    priority
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center text-charcoal/30 text-sm">
@@ -136,10 +140,12 @@ export default async function HomePage() {
                     <Link href={`/projects/${project.slug}`} className="group block space-y-4">
                       {/* Premium Image reveals for grid entries */}
                       <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-primary-beige border border-primary-beige/50 gsap-reveal-image gsap-parallax">
-                        <img
+                        <Image
                           src={project.coverImage}
                           alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-700"
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover group-hover:scale-[1.05] transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
                           <span className="text-primary-white flex items-center gap-1 text-sm tracking-wider uppercase font-semibold">

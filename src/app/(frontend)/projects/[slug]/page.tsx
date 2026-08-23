@@ -3,6 +3,7 @@ import Navbar from '@/frontend/components/Navbar';
 import Footer from '@/frontend/components/Footer';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowLeft, MapPin, Calendar, Layers } from 'lucide-react';
 import GSAPWrapper from '@/frontend/components/GSAPWrapper';
 
@@ -100,10 +101,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {/* Asymmetric Gallery Layout with Dynamic GSAP Reveals */}
           <div className="space-y-12 pt-8">
             <div className="relative aspect-[16/9] w-full bg-primary-beige overflow-hidden rounded-3xl border border-primary-beige gsap-reveal-image gsap-parallax">
-              <img
+              <Image
                 src={project.coverImage}
                 alt={`${project.title} cover`}
-                className="w-full h-full object-cover"
+                fill
+                sizes="100vw"
+                className="object-cover"
+                priority
               />
             </div>
 
@@ -112,10 +116,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 {project.images.map((img, index) => (
                   <div key={img.id} className="gsap-stagger-item">
                     <div className="relative aspect-[4/3] w-full bg-primary-beige overflow-hidden rounded-2xl border border-primary-beige gsap-reveal-image gsap-parallax">
-                      <img
+                      <Image
                         src={img.url}
                         alt={`${project.title} detail ${index + 1}`}
-                        className="w-full h-full object-cover hover:scale-[1.05] transition-transform duration-[1.5s]"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover hover:scale-[1.05] transition-transform duration-[1.5s]"
                       />
                     </div>
                   </div>
