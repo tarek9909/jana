@@ -53,12 +53,3 @@ html {
   transform: translateY(0);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-
-/* Image rendering & scaling optimization to prevent pixelation/blurriness */
-img, .gsap-reveal-image {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: auto;
-  backface-visibility: hidden;
-  will-change: transform;
-  transform: translateZ(0);
-}
