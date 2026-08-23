@@ -7,9 +7,6 @@ interface FooterProps {
   contactAddress?: string | null;
   copyrightText?: string | null;
   footerManifesto?: string | null;
-  instagramUrl?: string | null;
-  pinterestUrl?: string | null;
-  linkedinUrl?: string | null;
 }
 
 export default function Footer({
@@ -19,9 +16,6 @@ export default function Footer({
   contactAddress,
   copyrightText,
   footerManifesto,
-  instagramUrl,
-  pinterestUrl,
-  linkedinUrl,
 }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
@@ -77,11 +71,6 @@ export default function Footer({
 
         <div className="border-t border-primary-beige/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light text-primary-beige/40 space-y-4 md:space-y-0">
           <p>{copyrightText || `© ${currentYear} ${siteName}. All Rights Reserved.`}</p>
-          <div className="flex space-x-6">
-            <a href={instagramUrl || '#'} target="_blank" rel="noopener noreferrer" className="hover:text-primary-white transition-colors">Instagram</a>
-            <a href={pinterestUrl || '#'} target="_blank" rel="noopener noreferrer" className="hover:text-primary-white transition-colors">Pinterest</a>
-            <a href={linkedinUrl || '#'} target="_blank" rel="noopener noreferrer" className="hover:text-primary-white transition-colors">LinkedIn</a>
-          </div>
         </div>
       </div>
     </footer>

@@ -309,9 +309,6 @@ export default async function HomePage() {
         contactAddress={settings.contactAddress}
         copyrightText={settings.copyrightText}
         footerManifesto={settings.footerManifesto}
-        instagramUrl={settings.instagramUrl}
-        pinterestUrl={settings.pinterestUrl}
-        linkedinUrl={settings.linkedinUrl}
       />
     </>
   );
